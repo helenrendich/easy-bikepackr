@@ -2,7 +2,7 @@ import axios from 'axios'
 import {useEffect, useState} from "react";
 import {Checklist} from "../../models/Checklist";
 
-const apiUrl = '/api/easy-bikepackr/lists/'
+const apiUrl = '/api/easy-bikepackr/lists'
 
 function useChecklistsApi() {
     const [checklists, setChecklists] = useState<Checklist[]>([])
