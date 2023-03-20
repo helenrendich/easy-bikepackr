@@ -16,7 +16,7 @@ public class ChecklistController {
 
     private final ChecklistService checklistService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Checklist> getAllChecklists() {
         return checklistService.getAllChecklists();
     }
