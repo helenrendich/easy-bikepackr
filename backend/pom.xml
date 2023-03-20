@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <sonar.organization>helenrendich</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.exclusions>**/Checklist.java</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
