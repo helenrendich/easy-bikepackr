@@ -14,6 +14,6 @@ public class ChecklistService {
     private final ChecklistRepository checklistRepository;
 
     public List<Checklist> getAllChecklists() {
-        return checklistRepository.getAllChecklists();
+        return checklistRepository.findAll();
     }
 }

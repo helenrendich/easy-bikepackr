@@ -12,12 +12,10 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
     return (
         <>
             <h1 className="gallery--title">Adventure Checklists</h1>
-            <div>
-                <div className="gallery--body">
-                    {props.checklists.map((checklist) => (
-                        <ChecklistCard key={checklist.id} checklist={checklist}/>
-                    ))}
-                </div>
+            <div className="gallery--body">
+                {props.checklists.map((checklist) => (
+                    <ChecklistCard key={checklist.id} checklist={checklist}/>
+                ))}
             </div>
         </>
     )

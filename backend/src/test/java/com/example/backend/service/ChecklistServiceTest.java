@@ -29,11 +29,11 @@ class ChecklistServiceTest {
         @DisplayName("...returns all checklists if the repo is not empty")
         void getAllChecklists_returnsAllChecklistsIfTheRepoIsNotEmpty() {
             //GIVEN
-            when(checklistRepository.getAllChecklists()).thenReturn(expectedChecklists);
+            when(checklistRepository.findAll()).thenReturn(expectedChecklists);
             //WHEN
             List<Checklist> actual = checklistService.getAllChecklists();
             //THEN
-            verify(checklistRepository).getAllChecklists();
+            verify(checklistRepository).findAll();
             Assertions.assertEquals(expectedChecklists, actual);
         }
 
@@ -41,11 +41,11 @@ class ChecklistServiceTest {
         @DisplayName("...returns an empty list if the repo is empty")
         void getAllChecklistsEmptyRepo() {
             //GIVEN
-            when(checklistRepository.getAllChecklists()).thenReturn(expectedChecklistsEmpty);
+            when(checklistRepository.findAll()).thenReturn(expectedChecklistsEmpty);
             //WHEN
             List<Checklist> actual = checklistService.getAllChecklists();
             //THEN
-            verify(checklistRepository).getAllChecklists();
+            verify(checklistRepository).findAll();
             Assertions.assertEquals(expectedChecklistsEmpty, actual);
         }
     }
