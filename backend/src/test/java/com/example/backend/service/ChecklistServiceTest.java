@@ -16,7 +16,8 @@ import static org.mockito.Mockito.*;
 class ChecklistServiceTest {
 
     ChecklistRepository checklistRepository = mock(ChecklistRepository.class);
-    ChecklistService checklistService = new ChecklistService(checklistRepository);
+    IdService mockedIdService = mock(IdService.class);
+    ChecklistService checklistService = new ChecklistService(checklistRepository, mockedIdService);
 
     Checklist testChecklist = new Checklist("testId", "testDestination", LocalDate.of(2024, 1, 8));
     List<Checklist> expectedChecklists = List.of(testChecklist);

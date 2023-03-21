@@ -1,11 +1,10 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Checklist;
+import com.example.backend.model.ChecklistRequest;
 import com.example.backend.service.ChecklistService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,10 @@ public class ChecklistController {
     @GetMapping
     public List<Checklist> getAllChecklists() {
         return checklistService.getAllChecklists();
+    }
+
+    @PostMapping
+    public Checklist addChecklist(@RequestBody ChecklistRequest checklistRequest) {
+        return checklistService.addChecklist(checklistRequest);
     }
 }
