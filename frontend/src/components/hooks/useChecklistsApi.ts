@@ -40,7 +40,7 @@ function useChecklistsApi() {
             .finally(() => setLoading(false))
     }
 
-    return {loading, checklists}
+    return {loading, checklists, addChecklist}
 }
 
 export default useChecklistsApi
