@@ -3,3 +3,5 @@ export type Checklist = {
     destination: string
     startDate: string
 }
+
+export type NewChecklist = Omit<Checklist, "id">

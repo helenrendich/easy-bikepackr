@@ -1,16 +1,16 @@
 import React from 'react';
 import ChecklistGallery from "../ChecklistGallery/ChecklistGallery";
 import useChecklistsApi from "../hooks/useChecklistsApi";
+import AddChecklist from "../AddChecklist/AddChecklist";
 
 
 function App() {
-    const {loading, checklists} = useChecklistsApi()
+    const {loading, checklists, addChecklist} = useChecklistsApi()
     return (
-        <div>
-            <main className="main">
-                {!loading && <ChecklistGallery checklists={checklists}/>}
-            </main>
-        </div>
+        <>
+            {!loading && <ChecklistGallery checklists={checklists}/>}
+            {<AddChecklist addChecklist={addChecklist}/>}
+        </>
     );
 }
 
