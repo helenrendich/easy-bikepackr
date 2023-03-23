@@ -43,7 +43,6 @@ function AddChecklist(props: AddChecklistProps) {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker label="Select Start Date"
                             format="DD/MM/YYYY"
-                            value={null}
                             onChange={handleDateChange}
                 />
             </LocalizationProvider>
