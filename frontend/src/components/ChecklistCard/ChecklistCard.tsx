@@ -1,19 +1,38 @@
-import React from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import {Checklist} from "../../models/Checklist";
-import './ChecklistCard.css'
 
 type ChecklistCardProps = {
     checklist: Checklist
 }
 
 function ChecklistCard(props: ChecklistCardProps) {
+    const dateString = props.checklist.startDate;
+    const dateDate = new Date(dateString);
+    const card = (
+        <React.Fragment>
+            <CardContent>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    {dateDate.toLocaleDateString("en-GB")}
+                </Typography>
+                <Typography variant="h5" component="div">
+                    {props.checklist.destination}
+                </Typography>
+            </CardContent>
+        </React.Fragment>
+    );
 
     return (
-        <div className="gallery__card" id={props.checklist.id}>
-            <h2 className="gallery__card--title">{props.checklist.destination}</h2>
-            <h3 className="gallery__card--date">{props.checklist.startDate.getDate()}</h3>
-        </div>
-    )
+        <Box display="flex"
+             justifyContent="center"
+             alignItems="center"
+             minHeight="10vh">
+            <Card variant="outlined" sx={{width: 400, textAlign: 'center'}}>{card}</Card>
+        </Box>
+    );
 }
 
 export default ChecklistCard
