@@ -80,7 +80,7 @@ class ChecklistControllerTest {
                                         "startDate": "2024-01-08"
                                     }
                                     """))
-                    .andExpect(status().isOk())
+                    .andExpect(status().isCreated())
                     .andExpect(content().json("""
                             {
                                 "destination": "testDestination",
