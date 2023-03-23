@@ -1,7 +1,9 @@
 import React from "react";
 import {Checklist} from "../../models/Checklist";
 import ChecklistCard from "../ChecklistCard/ChecklistCard";
-import {Box, Typography} from "@mui/material";
+import {Box, IconButton, Typography} from "@mui/material";
+import {AddCircle} from "@mui/icons-material";
+import {Link} from "react-router-dom";
 
 
 type ChecklistGalleryProps = {
@@ -19,6 +21,14 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
             {props.checklists.map((checklist) => (
                 <ChecklistCard key={checklist.id} checklist={checklist}/>
             ))}
+            <Box display="flex"
+                 justifyContent="center">
+                <Link to="add">
+                    <IconButton color="inherit">
+                        <AddCircle/>
+                    </IconButton>
+                </Link>
+            </Box>
         </>
     )
 }
