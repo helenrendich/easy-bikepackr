@@ -28,6 +28,7 @@ function useChecklistsApi() {
     }
 
     function addChecklist(checklist: NewChecklist) {
+        setLoading(true)
         return axios
             .post(apiUrlSlug, checklist)
             .then((response) => response.data)
@@ -40,7 +41,24 @@ function useChecklistsApi() {
             .finally(() => setLoading(false))
     }
 
-    return {loading, checklists, addChecklist}
+    function deleteChecklist(id: string) {
+        setLoading(true)
+        axios
+            .delete(apiUrlSlug + '/' + id)
+            .then((response) => response.data)
+            .then((checklistToDelete: Checklist): Checklist[] => {
+                return checklists.filter(checklist => (checklist.id !== checklistToDelete.id))
+            })
+            .then((newChecklistArray: Checklist[]): void => {
+                setChecklists(newChecklistArray)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+            .finally(() => setLoading(false))
+    }
+
+    return {loading, checklists, addChecklist, deleteChecklist}
 }
 
 export default useChecklistsApi

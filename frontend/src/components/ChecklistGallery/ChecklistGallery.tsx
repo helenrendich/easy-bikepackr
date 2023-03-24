@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 
 type ChecklistGalleryProps = {
     checklists: Checklist[]
+    deleteChecklist: (id: string) => void
 }
 
 
@@ -19,7 +20,7 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
                 <Typography variant="h2"> Adventure Checklists</Typography>
             </Box>
             {props.checklists.map((checklist) => (
-                <ChecklistCard key={checklist.id} checklist={checklist}/>
+                <ChecklistCard key={checklist.id} checklist={checklist} deleteChecklist={props.deleteChecklist}/>
             ))}
             <Box display="flex"
                  justifyContent="center">

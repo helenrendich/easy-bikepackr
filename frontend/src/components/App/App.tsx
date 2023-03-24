@@ -6,11 +6,12 @@ import {Route, Routes} from "react-router-dom";
 
 
 function App() {
-    const {checklists, addChecklist} = useChecklistsApi()
+    const {checklists, addChecklist, deleteChecklist} = useChecklistsApi()
     return (
         <>
             <Routes>
-                <Route path="/" element={<ChecklistGallery checklists={checklists}/>}/>
+                <Route path="/"
+                       element={<ChecklistGallery checklists={checklists} deleteChecklist={deleteChecklist}/>}/>
                 <Route path="/add" element={<AddChecklist addChecklist={addChecklist}/>}/>
             </Routes>
         </>

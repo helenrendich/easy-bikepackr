@@ -4,17 +4,28 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {Checklist} from "../../models/Checklist";
+import {Button} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 type ChecklistCardProps = {
     checklist: Checklist
+    deleteChecklist: (id: string) => void
 }
 
 function ChecklistCard(props: ChecklistCardProps) {
     const dateString = props.checklist.startDate;
     const dateDate = new Date(dateString);
+
+    function handleDelete() {
+        props.deleteChecklist(props.checklist.id)
+    }
+
     const card = (
         <React.Fragment>
             <CardContent>
+                <Button onClick={handleDelete} variant="outlined" startIcon={<DeleteIcon/>}>
+                    Delete
+                </Button>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                     {dateDate.toLocaleDateString("en-GB")}
                 </Typography>
