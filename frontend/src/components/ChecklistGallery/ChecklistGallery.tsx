@@ -16,7 +16,7 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
         <>
             <Box display="flex"
                  justifyContent="center">
-                <Typography variant="h1"> Adventure Checklists</Typography>
+                <Typography variant="h2"> Adventure Checklists</Typography>
             </Box>
             {props.checklists.map((checklist) => (
                 <ChecklistCard key={checklist.id} checklist={checklist}/>

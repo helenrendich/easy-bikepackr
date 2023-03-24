@@ -14,8 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -88,6 +87,35 @@ class ChecklistControllerTest {
                             }
                             """))
                     .andExpect(jsonPath("$.id").isNotEmpty());
+        }
+    }
+
+    @Nested
+    @DisplayName("DELETE /api/easy-bikepackr/lists/{id}")
+    class testDeleteChecklist {
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...should delete the checklist with the given id if it does exist in the database")
+        void deleteChecklist_deletesABikeIfTheBikeWithTheGivenIdDoesExist() throws Exception {
+            checklistRepository.save(testChecklist);
+            mockMvc.perform(delete("/api/easy-bikepackr/lists/" + testChecklist.id()))
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("""
+                                    {
+                                       "id": "Some test ID",
+                                       "destination": "testDestination",
+                                       "startDate": "2024-01-08"
+                                    }
+                            """));
+        }
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...should throw an exception if the checklist with the given id does not exist")
+        void deleteChecklist_throwsExceptionIfTheChecklistWithTheGivenIdDoesNotExist() throws Exception {
+            mockMvc.perform(delete("/api/easy-bikepackr/lists/41"))
+                    .andExpect(status().isNotFound());
         }
     }
 }

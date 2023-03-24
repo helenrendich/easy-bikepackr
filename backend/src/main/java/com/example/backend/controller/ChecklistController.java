@@ -26,4 +26,9 @@ public class ChecklistController {
     public Checklist addChecklist(@RequestBody ChecklistRequest checklistRequest) {
         return checklistService.addChecklist(checklistRequest);
     }
+
+    @DeleteMapping("/{id}")
+    public Checklist deleteChecklist(@PathVariable String id) {
+        return checklistService.deleteChecklist(id);
+    }
 }

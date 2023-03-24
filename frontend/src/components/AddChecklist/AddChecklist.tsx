@@ -33,7 +33,7 @@ function AddChecklist(props: AddChecklistProps) {
     }
 
     return (
-        <Box display="flex" justifyContent="center" flexDirection="column" width={700}>
+        <Box display="flex" alignItems="center" flexDirection="column" margin={20} width={700}>
 
             <Typography variant="h3">Plan your next Adventure</Typography>
 
