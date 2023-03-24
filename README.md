@@ -5,7 +5,9 @@ The app allows you to view both an overview and detailed checklists, as well as 
 
 ## Project Planning
 API endpoints are documented in this excalidraw file: https://excalidraw.com/#json=1zz2EqJrbuaGeAa35cLYv,Cm_bPVawHY29E60EK-_czA
+
 Models are documented here: https://www.figma.com/file/vj3xu4JodDF1LlrDIzt3O9/Models_Bikepacking?node-id=0%3A1&t=CRpOyJwOQmwZ2Sm5-1
+
 You find the Figma Prototype here: https://www.figma.com/file/rysb9nHwCmdPCJ7Hj1oZHv/Easy-Bikepackr?node-id=1%3A22&t=AYCRIFKu1RF8FwmB-1
 
 ## Getting Started
