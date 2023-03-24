@@ -1,6 +1,6 @@
 # Easy BikePackr
 The application creates a personalized packing checklist for your upcoming bike trip, taking into consideration your specific requirements
-such as special equipment due to your chosen accommodation or travel pace (competitive or leisurely).
+such as special equipment due to your chosen accommodation (e.g. vacation rental, hotel, camping) or travel pace (competitive or leisurely).
 The app allows you to view both an overview and detailed checklists, as well as create, edit, and delete checklists as needed.
 
 ## Project Planning
