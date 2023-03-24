@@ -13,4 +13,4 @@ Finally, I have created a prototype of my project in Figma, which can be accesse
 ## Getting Started
 After cloning the project, load the maven project and run npm install.
 This project uses a MongoDB to store data. Set up a local MongoDB as specified in the application.properties file.
-Set the MONGODB_URI connection string as an environment variable.
+Set the MONGODB_URL connection string as an environment variable.
