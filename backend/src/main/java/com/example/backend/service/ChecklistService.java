@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -24,5 +25,15 @@ public class ChecklistService {
         Checklist checklistToAdd =
                 new Checklist(idService.generateId(), incomingChecklist.destination(), incomingChecklist.startDate());
         return checklistRepository.save(checklistToAdd);
+    }
+
+    public Checklist deleteChecklist(String id) {
+        Optional<Checklist> checklistToDelete = checklistRepository.findById(id);
+        if (checklistToDelete.isEmpty()) {
+            throw new NoSuchChecklistException();
+        } else {
+            checklistRepository.deleteById(id);
+            return checklistToDelete.get();
+        }
     }
 }

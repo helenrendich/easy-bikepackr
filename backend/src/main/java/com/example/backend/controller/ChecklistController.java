@@ -4,6 +4,7 @@ import com.example.backend.model.Checklist;
 import com.example.backend.model.ChecklistRequest;
 import com.example.backend.service.ChecklistService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,13 @@ public class ChecklistController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Checklist addChecklist(@RequestBody ChecklistRequest checklistRequest) {
         return checklistService.addChecklist(checklistRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public Checklist deleteChecklist(@PathVariable String id) {
+        return checklistService.deleteChecklist(id);
     }
 }

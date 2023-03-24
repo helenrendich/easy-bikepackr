@@ -7,6 +7,8 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Button from '@mui/material/Button';
 import {NewChecklist} from "../../models/Checklist";
 import dayjs from 'dayjs';
+import {Box, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 
 type AddChecklistProps = {
     addChecklist: (checklist: NewChecklist) => Promise<void>
@@ -31,7 +33,10 @@ function AddChecklist(props: AddChecklistProps) {
     }
 
     return (
-        <>
+        <Box display="flex" alignItems="center" flexDirection="column" margin={20} width={700}>
+
+            <Typography variant="h3">Plan your next Adventure</Typography>
+
             <TextField
                 id="filled-basic"
                 label="Destination"
@@ -47,8 +52,16 @@ function AddChecklist(props: AddChecklistProps) {
                 />
             </LocalizationProvider>
 
-            <Button onClick={handleSubmit} variant="contained">Create Checklist</Button>
-        </>
+            <Link to="/">
+                <Button sx={
+                    {height: '55px'}
+                }
+                        onClick={handleSubmit} variant="contained">
+                    Create Checklist
+                </Button>
+            </Link>
+
+        </Box>
     );
 }
 
