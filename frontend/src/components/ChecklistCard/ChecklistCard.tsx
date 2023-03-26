@@ -41,7 +41,7 @@ function ChecklistCard(props: ChecklistCardProps) {
              justifyContent="center"
              alignItems="center"
              minHeight="10vh">
-            <Card variant="outlined" sx={{width: 400, textAlign: 'center'}}>{card}</Card>
+            <Card variant="outlined" sx={{width: 400, textAlign: 'center', margin: 1}}>{card}</Card>
         </Box>
     );
 }
