@@ -41,7 +41,7 @@ function AddChecklist(props: AddChecklistProps) {
             >
                 <Box display="flex" flexDirection="column">
 
-                    <Typography variant="h5">Plan your next Adventure</Typography>
+                    <Typography variant="h5" sx={{textAlign: 'center', margin: 3}}>Plan your next Adventure</Typography>
 
                     <TextField
                         sx={
