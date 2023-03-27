@@ -23,15 +23,17 @@ function ChecklistCard(props: ChecklistCardProps) {
     const card = (
         <React.Fragment>
             <CardContent>
-                <Button onClick={handleDelete} variant="outlined" startIcon={<DeleteIcon/>}>
-                    Delete
-                </Button>
-                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    {dateDate.toLocaleDateString("en-GB")}
-                </Typography>
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div" margin={2}>
                     {props.checklist.destination}
                 </Typography>
+                <Box display="flex" flexDirection="row" justifyContent="space-between">
+                    <Typography sx={{fontSize: 17}} color="text.secondary" gutterBottom>
+                        {dateDate.toLocaleDateString("en-GB")}
+                    </Typography>
+                    <Button size="small" onClick={handleDelete} variant="outlined" startIcon={<DeleteIcon/>}>
+                        Delete
+                    </Button>
+                </Box>
             </CardContent>
         </React.Fragment>
     );
@@ -41,7 +43,8 @@ function ChecklistCard(props: ChecklistCardProps) {
              justifyContent="center"
              alignItems="center"
              minHeight="10vh">
-            <Card variant="outlined" sx={{width: 400, textAlign: 'center'}}>{card}</Card>
+            <Card variant="outlined"
+                  sx={{width: 400, textAlign: 'center', margin: 1}}>{card}</Card>
         </Box>
     );
 }
