@@ -108,4 +108,28 @@ class ChecklistServiceTest {
             Assertions.assertThrows(NoSuchChecklistException.class, () -> checklistService.deleteChecklist("41"));
         }
     }
+
+    @Nested
+    @DisplayName("testing getChecklistById()")
+    class getChecklistByIdTest {
+
+        @Test
+        @DirtiesContext
+        @DisplayName("... returns a checklist if the checklist with the given id exists")
+        void getChecklistById_IdExists() throws NoSuchChecklistException {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+            //WHEN
+            Checklist actual = checklistService.getChecklistById(testChecklist.id());
+            //THEN
+            Assertions.assertEquals(testChecklist, actual);
+        }
+
+        @Test
+        @DisplayName("...throws an exception if no checklist with the given id exists")
+        void getChecklistById_throwExceptionIfNoChecklistWithTheGivenIdExists() throws NoSuchChecklistException {
+            Class<NoSuchChecklistException> expected = NoSuchChecklistException.class;
+            Assertions.assertThrows(expected, () -> checklistService.getChecklistById("41"));
+        }
+    }
 }

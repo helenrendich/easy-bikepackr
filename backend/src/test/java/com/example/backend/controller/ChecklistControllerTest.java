@@ -97,7 +97,7 @@ class ChecklistControllerTest {
         @Test
         @DirtiesContext
         @DisplayName("...should delete the checklist with the given id if it does exist in the database")
-        void deleteChecklist_deletesABikeIfTheBikeWithTheGivenIdDoesExist() throws Exception {
+        void deleteChecklist_deletesAChecklistIfTheChecklistWithTheGivenIdDoesExist() throws Exception {
             checklistRepository.save(testChecklist);
             mockMvc.perform(delete("/api/easy-bikepackr/lists/" + testChecklist.id()))
                     .andExpect(status().isOk())
@@ -116,6 +116,37 @@ class ChecklistControllerTest {
         void deleteChecklist_throwsExceptionIfTheChecklistWithTheGivenIdDoesNotExist() throws Exception {
             mockMvc.perform(delete("/api/easy-bikepackr/lists/41"))
                     .andExpect(status().isNotFound());
+        }
+    }
+
+    @Nested
+    @DisplayName("GET /api/easy-bikepackr/lists/{id}")
+    class testGetChecklistById {
+
+        @Test
+        @DisplayName("...should throw an exception if the checklist with the given id does not exist in the database")
+        void testGetChecklistById_throwsException() throws Exception {
+            mockMvc.perform(get("/api/easy-bikepackr/lists/41"))
+                    .andExpect(status().isNotFound());
+        }
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...should return a checklist if the checklist with the given id does exist")
+        void testGetChecklistById_IdExists() throws Exception {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+
+            //WHEN + THEN
+            mockMvc.perform(get("/api/easy-bikepackr/lists/" + testChecklist.id()))
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("""
+                                    {
+                                                            "id": "Some test ID",
+                                                            "destination": "testDestination",
+                                                            "startDate": "2024-01-08"
+                                                         }
+                            """));
         }
     }
 }

@@ -21,6 +21,10 @@ public class ChecklistService {
         return checklistRepository.findAll();
     }
 
+    public Checklist getChecklistById(String id) {
+        return checklistRepository.findById(id).orElseThrow(NoSuchChecklistException::new);
+    }
+
     public Checklist addChecklist(ChecklistRequest incomingChecklist) {
         Checklist checklistToAdd =
                 new Checklist(idService.generateId(), incomingChecklist.destination(), incomingChecklist.startDate());

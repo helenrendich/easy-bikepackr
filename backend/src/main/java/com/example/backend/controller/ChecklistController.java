@@ -21,6 +21,11 @@ public class ChecklistController {
         return checklistService.getAllChecklists();
     }
 
+    @GetMapping("/{id}")
+    public Checklist getChecklistById(@PathVariable String id) {
+        return checklistService.getChecklistById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Checklist addChecklist(@RequestBody ChecklistRequest checklistRequest) {
