@@ -30,8 +30,8 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
                 <Box display="flex"
                      justifyContent="center">
                     <Link to="add">
-                        <IconButton color="inherit">
-                            <AddCircle/>
+                        <IconButton sx={{minHeight: 55, minWidth: 55}}>
+                            <AddCircle sx={{minHeight: 55, minWidth: 55}}/>
                         </IconButton>
                     </Link>
                 </Box>
