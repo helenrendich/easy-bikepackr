@@ -3,6 +3,7 @@ import ChecklistGallery from "../ChecklistGallery/ChecklistGallery";
 import useChecklistsApi from "../hooks/useChecklistsApi";
 import AddChecklist from "../AddChecklist/AddChecklist";
 import {Route, Routes} from "react-router-dom";
+import ChecklistDetails from "../ChecklistDetails/ChecklistDetails";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
                 <Route path="/"
                        element={<ChecklistGallery checklists={checklists} deleteChecklist={deleteChecklist}/>}/>
                 <Route path="/add" element={<AddChecklist addChecklist={addChecklist}/>}/>
+                <Route path="/details" element={<ChecklistDetails/>}/>
             </Routes>
         </>
     );
