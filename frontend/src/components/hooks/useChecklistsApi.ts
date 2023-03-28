@@ -6,20 +6,35 @@ const apiUrlSlug = '/api/easy-bikepackr/lists'
 
 function useChecklistsApi() {
     const [checklists, setChecklists] = useState<Checklist[]>([])
+    const [checklist, setChecklist] = useState<Checklist | null>(null);
     const [loading, setLoading] = useState<boolean>(true)
 
 
     useEffect(() => {
-        fetchBikes()
+        fetchChecklists()
     }, [])
 
-    function fetchBikes() {
+    function fetchChecklists() {
         setLoading(true)
         axios
             .get(apiUrlSlug)
             .then((response) => response.data)
             .then((incomingChecklists) => {
                 setChecklists(incomingChecklists)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+            .finally(() => setLoading(false))
+    }
+
+    function fetchSingleChecklist(id: string) {
+        setLoading(true)
+        axios
+            .get(apiUrlSlug + '/' + id)
+            .then((response) => response.data)
+            .then((incomingChecklist) => {
+                setChecklist(incomingChecklist)
             })
             .catch((error) => {
                 console.error(error)
@@ -58,7 +73,7 @@ function useChecklistsApi() {
             .finally(() => setLoading(false))
     }
 
-    return {loading, checklists, addChecklist, deleteChecklist}
+    return {loading, checklists, checklist, fetchSingleChecklist, addChecklist, deleteChecklist}
 }
 
 export default useChecklistsApi

@@ -10,6 +10,7 @@ import Layout from "../Layout/Layout";
 type ChecklistGalleryProps = {
     checklists: Checklist[]
     deleteChecklist: (id: string) => void
+    fetchSingleChecklist: (id: string) => void
 }
 
 
@@ -25,7 +26,8 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
                     <Typography variant="h4" sx={{textAlign: 'center', margin: 3}}> Adventure Checklists</Typography>
                 </Box>
                 {props.checklists.map((checklist) => (
-                    <ChecklistCard key={checklist.id} checklist={checklist} deleteChecklist={props.deleteChecklist}/>
+                    <ChecklistCard key={checklist.id} checklist={checklist} deleteChecklist={props.deleteChecklist}
+                                   fetchSingleChecklist={props.fetchSingleChecklist}/>
                 ))}
                 <Box display="flex"
                      justifyContent="center">
