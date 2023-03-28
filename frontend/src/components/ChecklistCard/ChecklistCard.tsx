@@ -22,7 +22,7 @@ function ChecklistCard(props: ChecklistCardProps) {
 
     const card = (
         <React.Fragment>
-            <Link href={"/details"} underline={'none'}>
+            <Link href={"details/" + props.checklist.id} underline={'none'}>
                 <CardContent>
                     <Typography variant="h5" component="div" margin={2}>
                         {props.checklist.destination}

@@ -14,7 +14,7 @@ function App() {
                 <Route path="/"
                        element={<ChecklistGallery checklists={checklists} deleteChecklist={deleteChecklist}/>}/>
                 <Route path="/add" element={<AddChecklist addChecklist={addChecklist}/>}/>
-                <Route path="/details" element={<ChecklistDetails/>}/>
+                <Route path="/details/:id" element={<ChecklistDetails checklists={checklists}/>}/>
             </Routes>
         </>
     );
