@@ -7,14 +7,15 @@ import ChecklistDetails from "../ChecklistDetails/ChecklistDetails";
 
 
 function App() {
-    const {checklists, addChecklist, deleteChecklist} = useChecklistsApi()
+    const {checklists, addChecklist, deleteChecklist, editChecklist} = useChecklistsApi()
     return (
         <>
             <Routes>
                 <Route path="/"
                        element={<ChecklistGallery checklists={checklists} deleteChecklist={deleteChecklist}/>}/>
                 <Route path="/add" element={<AddChecklist addChecklist={addChecklist}/>}/>
-                <Route path="/details/:id" element={<ChecklistDetails checklists={checklists}/>}/>
+                <Route path="/details/:id"
+                       element={<ChecklistDetails checklists={checklists} editChecklist={editChecklist}/>}/>
             </Routes>
         </>
     );

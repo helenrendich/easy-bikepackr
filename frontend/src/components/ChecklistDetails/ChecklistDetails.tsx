@@ -7,10 +7,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Layout from "../Layout/Layout";
 import {useParams} from "react-router-dom";
 import {Checklist} from "../../models/Checklist";
-import {CardContent} from "@mui/material";
+import {Button, Card, CardActions, CardContent} from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 
 type ChecklistDetailsProps = {
     checklists: Checklist[]
+    editChecklist: (updatedChecklist: Checklist) => void
 }
 
 function ChecklistDetails(props: ChecklistDetailsProps) {
@@ -22,14 +24,21 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
     return (
         <div>
             <Layout>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {checklist?.destination}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {dateDate?.toLocaleDateString("en-GB")}
-                    </Typography>
-                </CardContent>
+                <Card>
+                    <CardContent>
+                        <CardActions sx={{justifyContent: "flex-end"}}>
+                            <Button>
+                                <EditIcon color="action"/>
+                            </Button>
+                        </CardActions>
+                        <Typography gutterBottom variant="h5" component="div">
+                            {checklist?.destination}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {dateDate?.toLocaleDateString("en-GB")}
+                        </Typography>
+                    </CardContent>
+                </Card>
                 <Typography gutterBottom variant="h6" margin={1}>Checklist</Typography>
                 <Accordion>
                     <AccordionSummary
