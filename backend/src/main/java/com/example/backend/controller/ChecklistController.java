@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Checklist;
+import com.example.backend.model.ChecklistDTO;
 import com.example.backend.model.ChecklistRequest;
 import com.example.backend.service.ChecklistService;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,10 @@ public class ChecklistController {
     @DeleteMapping("/{id}")
     public Checklist deleteChecklist(@PathVariable String id) {
         return checklistService.deleteChecklist(id);
+    }
+
+    @PutMapping
+    public Checklist updateChecklist(@RequestBody ChecklistDTO checklistToUpdate) {
+        return checklistService.updateChecklist(checklistToUpdate);
     }
 }

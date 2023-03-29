@@ -118,4 +118,35 @@ class ChecklistControllerTest {
                     .andExpect(status().isNotFound());
         }
     }
+
+    @Nested
+    @DisplayName("PUT /api/easy-bikepackr/lists")
+    class testPutChecklist {
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...should update the checklist and return it if there is a bike with the given id in the database")
+        void updateChecklist_returnsAChecklistIfThereIsAChecklistWithTheGivenId() throws Exception {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+            //WHEN + THEN
+            mockMvc.perform(put("/api/easy-bikepackr/lists")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("""
+                                            {
+                                                               "id": "Some test ID",
+                                                               "destination": "updatedDestination",
+                                                               "startDate": "2025-01-08"
+                                                               }
+                                    """))
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("""
+                                    {
+                                    "id": "Some test ID",
+                                                         "destination": "updatedDestination",
+                                                         "startDate": "2025-01-08"
+                                    }
+                            """));
+        }
+    }
 }

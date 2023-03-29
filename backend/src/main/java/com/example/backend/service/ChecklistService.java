@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Checklist;
+import com.example.backend.model.ChecklistDTO;
 import com.example.backend.model.ChecklistRequest;
 import com.example.backend.repository.ChecklistRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,13 @@ public class ChecklistService {
             checklistRepository.deleteById(id);
             return checklistToDelete.get();
         }
+    }
+
+    public Checklist updateChecklist(ChecklistDTO incomingChecklist) throws NoSuchChecklistException {
+        if (!checklistRepository.existsById(incomingChecklist.id())) {
+            throw new NoSuchChecklistException();
+        }
+        Checklist result = new Checklist(incomingChecklist.id(), incomingChecklist.destination(), incomingChecklist.startDate());
+        return checklistRepository.save(result);
     }
 }

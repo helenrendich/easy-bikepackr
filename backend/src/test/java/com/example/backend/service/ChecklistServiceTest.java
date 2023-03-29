@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Checklist;
+import com.example.backend.model.ChecklistDTO;
 import com.example.backend.model.ChecklistRequest;
 import com.example.backend.repository.ChecklistRepository;
 import org.junit.jupiter.api.*;
@@ -26,8 +27,11 @@ class ChecklistServiceTest {
     String testId = "Some test ID";
     String testDestination = "testDestination";
     LocalDate testLocalDate = LocalDate.of(2024, 1, 8);
+    String testDestinationUpdated = "updated testDestination";
+    LocalDate testLocalDateUpdated = LocalDate.of(2025, 1, 8);
 
     Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate);
+    ChecklistDTO testChecklistUpdated = new ChecklistDTO(testId, testDestinationUpdated, testLocalDateUpdated);
     ChecklistRequest testChecklistRequest = new ChecklistRequest(testDestination, testLocalDate);
 
     @BeforeEach
@@ -106,6 +110,34 @@ class ChecklistServiceTest {
             //GIVEN
             //THEN
             Assertions.assertThrows(NoSuchChecklistException.class, () -> checklistService.deleteChecklist("41"));
+        }
+    }
+
+    @Nested
+    @DisplayName("testing updateChecklist()")
+    class updateChecklistTest {
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...throws an exception if the checklist with the given id does not exist yet")
+        void updateChecklist_throwsExceptionIfTheChecklistWithTheGivenIdDoesNotExist() {
+            //GIVEN
+            Class<NoSuchChecklistException> expected = NoSuchChecklistException.class;
+            //WHEN + THEN
+            Assertions.assertThrows(expected, () -> checklistService.updateChecklist(testChecklistUpdated));
+        }
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...updates an existing checklist in the database if the checklist with the given id does already exist")
+        void updateChecklist_updatesChecklistInTheDatabaseIfTheChecklistWithTheGivenIdDoesExist() {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+            Checklist expected = new Checklist(testChecklist.id(), testChecklistUpdated.destination(), testChecklistUpdated.startDate());
+            //WHEN
+            Checklist actual = checklistService.updateChecklist(testChecklistUpdated);
+            //THEN
+            Assertions.assertEquals(expected, actual);
         }
     }
 }
