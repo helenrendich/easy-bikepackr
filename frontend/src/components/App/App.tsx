@@ -1,6 +1,6 @@
 import React from 'react';
 import ChecklistGallery from "../ChecklistGallery/ChecklistGallery";
-import useChecklistsApi from "../hooks/useChecklistsApi";
+import useChecklistsApi from "../../hooks/useChecklistsApi";
 import AddChecklist from "../AddChecklist/AddChecklist";
 import {Route, Routes} from "react-router-dom";
 import ChecklistDetails from "../ChecklistDetails/ChecklistDetails";
