@@ -16,6 +16,8 @@ type ChecklistDetailsProps = {
 function ChecklistDetails(props: ChecklistDetailsProps) {
     const {id} = useParams<{ id: string }>()
     const checklist = (!!id && (props.checklists.find((checklist: Checklist) => checklist.id === id) as Checklist)) || null
+    const dateString = checklist?.startDate;
+    const dateDate = dateString ? new Date(dateString) : null;
 
     return (
         <div>
@@ -25,9 +27,10 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
                         {checklist?.destination}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {checklist?.startDate}
+                        {dateDate?.toLocaleDateString("en-GB")}
                     </Typography>
                 </CardContent>
+                <Typography gutterBottom variant="h6" margin={1}>Checklist</Typography>
                 <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
