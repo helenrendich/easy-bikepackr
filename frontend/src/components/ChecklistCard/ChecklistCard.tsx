@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {Checklist} from "../../models/Checklist";
-import {Button} from "@mui/material";
+import {Button, CardActions, Link} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 type ChecklistCardProps = {
@@ -22,19 +22,21 @@ function ChecklistCard(props: ChecklistCardProps) {
 
     const card = (
         <React.Fragment>
-            <CardContent>
-                <Typography variant="h5" component="div" margin={2}>
-                    {props.checklist.destination}
-                </Typography>
-                <Box display="flex" flexDirection="row" justifyContent="space-between">
+            <Link href={"details/" + props.checklist.id} underline={'none'}>
+                <CardContent>
+                    <Typography variant="h5" component="div" margin={2}>
+                        {props.checklist.destination}
+                    </Typography>
                     <Typography sx={{fontSize: 17}} color="text.secondary" gutterBottom>
                         {dateDate.toLocaleDateString("en-GB")}
                     </Typography>
-                    <Button size="small" onClick={handleDelete} variant="outlined" startIcon={<DeleteIcon/>}>
-                        Delete
-                    </Button>
-                </Box>
-            </CardContent>
+                </CardContent>
+            </Link>
+            <CardActions sx={{justifyContent: "flex-end"}}>
+                <Button size="small" onClick={handleDelete} variant="outlined" startIcon={<DeleteIcon/>}>
+                    Delete
+                </Button>
+            </CardActions>
         </React.Fragment>
     );
 
