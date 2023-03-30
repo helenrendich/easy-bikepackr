@@ -10,6 +10,7 @@ import {useParams} from "react-router-dom";
 import {Checklist} from "../../models/Checklist";
 import {Box, Button, Card, CardActions, CardContent} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import EditHeadlineCard from "./EditChecklistDetails/EditHeadlineCard";
 
 type ChecklistDetailsProps = {
     checklists: Checklist[]
@@ -17,7 +18,7 @@ type ChecklistDetailsProps = {
 }
 
 function ChecklistDetails(props: ChecklistDetailsProps) {
-    const [isUpdateVisible, setIsUpdateVisible] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
 
     const {id} = useParams<{ id: string }>()
     const checklist = (!!id && (props.checklists.find((checklist: Checklist) => checklist.id === id) as Checklist)) || null
@@ -25,7 +26,7 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
     const dateDate = dateString ? new Date(dateString) : null;
 
     function handleUpdateClick() {
-        setIsUpdateVisible(true);
+        setIsEditMode(true);
     }
 
     const headlineCard = (
@@ -46,12 +47,15 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
         </CardContent>
     );
 
+    const headlineCardEditMode = checklist ?
+        <EditHeadlineCard checklist={checklist} editChecklist={props.editChecklist}/> : null;
+
 
     return (
         <div>
             <Layout>
                 <Card>
-                    {isUpdateVisible ? (<CardContent></CardContent>) : headlineCard}
+                    {isEditMode ? (headlineCardEditMode) : headlineCard}
                 </Card>
                 <Typography gutterBottom variant="h6" margin={1}>Checklist</Typography>
                 <Accordion>
