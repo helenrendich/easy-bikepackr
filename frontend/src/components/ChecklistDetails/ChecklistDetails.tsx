@@ -48,7 +48,8 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
     );
 
     const headlineCardEditMode = checklist ?
-        <EditHeadlineCard checklist={checklist} editChecklist={props.editChecklist}/> : null;
+        <EditHeadlineCard checklist={checklist} editChecklist={props.editChecklist} isEditMode={isEditMode}
+                          setIsEditMode={setIsEditMode}/> : null;
 
 
     return (
