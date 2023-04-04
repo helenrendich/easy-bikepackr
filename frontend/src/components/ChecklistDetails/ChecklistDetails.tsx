@@ -115,6 +115,20 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
+                <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon/>}
+                        aria-controls="panel4a-content"
+                        id="panel4a-header"
+                    >
+                        <Typography>Additional Items</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            Items
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
             </Layout>
         </div>
     );

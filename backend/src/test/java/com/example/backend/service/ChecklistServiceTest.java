@@ -3,6 +3,7 @@ package com.example.backend.service;
 import com.example.backend.model.Checklist;
 import com.example.backend.model.ChecklistDTO;
 import com.example.backend.model.ChecklistRequest;
+import com.example.backend.model.Item;
 import com.example.backend.repository.ChecklistRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,9 @@ class ChecklistServiceTest {
     LocalDate testLocalDate = LocalDate.of(2024, 1, 8);
     String testDestinationUpdated = "updated testDestination";
     LocalDate testLocalDateUpdated = LocalDate.of(2025, 1, 8);
+    List<Item> testItems = List.of();
 
-    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate);
+    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems);
     ChecklistDTO testChecklistUpdated = new ChecklistDTO(testId, testDestinationUpdated, testLocalDateUpdated);
     ChecklistRequest testChecklistRequest = new ChecklistRequest(testDestination, testLocalDate);
 
@@ -133,7 +135,7 @@ class ChecklistServiceTest {
         void updateChecklist_updatesChecklistInTheDatabaseIfTheChecklistWithTheGivenIdDoesExist() {
             //GIVEN
             checklistRepository.save(testChecklist);
-            Checklist expected = new Checklist(testChecklist.id(), testChecklistUpdated.destination(), testChecklistUpdated.startDate());
+            Checklist expected = new Checklist(testChecklist.id(), testChecklistUpdated.destination(), testChecklistUpdated.startDate(), List.of());
             //WHEN
             Checklist actual = checklistService.updateChecklist(testChecklistUpdated);
             //THEN
