@@ -22,6 +22,7 @@ class ChecklistServiceTest {
     @Autowired
     ChecklistRepository checklistRepository;
     IdService mockedIdService = mock(IdService.class);
+    DefaultItemsService defaultItemsService = mock(DefaultItemsService.class);
     @Autowired
     ChecklistService checklistService;
 
@@ -30,7 +31,8 @@ class ChecklistServiceTest {
     LocalDate testLocalDate = LocalDate.of(2024, 1, 8);
     String testDestinationUpdated = "updated testDestination";
     LocalDate testLocalDateUpdated = LocalDate.of(2025, 1, 8);
-    List<Item> testItems = List.of();
+    Item testItem = new Item("ItemTestId", "Helmet", false, "Bike Gear");
+    List<Item> testItems = List.of(testItem);
 
     Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems);
     ChecklistDTO testChecklistUpdated = new ChecklistDTO(testId, testDestinationUpdated, testLocalDateUpdated);
@@ -39,8 +41,9 @@ class ChecklistServiceTest {
     @BeforeEach
     @DisplayName("set up test environment")
     void setUp() {
-        checklistService = new ChecklistService(checklistRepository, mockedIdService);
+        checklistService = new ChecklistService(checklistRepository, mockedIdService, defaultItemsService);
         when(mockedIdService.generateId()).thenReturn(testChecklist.id());
+        when(defaultItemsService.getDefaultItems()).thenReturn(testItems);
     }
 
     @Nested
@@ -86,6 +89,7 @@ class ChecklistServiceTest {
             Checklist actual = checklistService.addChecklist(testChecklistRequest);
             //THEN
             verify(mockedIdService).generateId();
+            verify(defaultItemsService).getDefaultItems();
             Assertions.assertEquals(expected, actual);
         }
     }

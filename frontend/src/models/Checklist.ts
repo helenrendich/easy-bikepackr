@@ -7,4 +7,4 @@ export type Checklist = {
     items: Item[]
 }
 
-export type NewChecklist = Omit<Checklist, "id">
+export type NewChecklist = Omit<Checklist, "id" | "items">
