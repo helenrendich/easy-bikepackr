@@ -43,7 +43,7 @@ public class ChecklistService {
         if (!checklistRepository.existsById(incomingChecklist.id())) {
             throw new NoSuchChecklistException();
         }
-        Checklist result = new Checklist(incomingChecklist.id(), incomingChecklist.destination(), incomingChecklist.startDate(), List.of());
+        Checklist result = new Checklist(incomingChecklist.id(), incomingChecklist.destination(), incomingChecklist.startDate(), incomingChecklist.items());
         return checklistRepository.save(result);
     }
 }
