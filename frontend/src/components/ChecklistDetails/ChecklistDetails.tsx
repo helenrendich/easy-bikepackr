@@ -1,16 +1,13 @@
 import * as React from 'react';
 import {useState} from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Layout from "../Layout/Layout";
 import {useParams} from "react-router-dom";
 import {Checklist} from "../../models/Checklist";
 import {Box, Button, Card, CardActions, CardContent} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import EditHeadlineCard from "./EditChecklistDetails/EditHeadlineCard";
+import AccordionCard from "./AccordionCard";
 
 type ChecklistDetailsProps = {
     checklists: Checklist[]
@@ -51,6 +48,17 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
         <EditHeadlineCard checklist={checklist} editChecklist={props.editChecklist} isEditMode={isEditMode}
                           setIsEditMode={setIsEditMode}/> : null;
 
+    const accordionCardBikeGear = checklist ?
+        <AccordionCard checklist={checklist} category={"Bike Gear"}/> : null;
+    const accordionCardFoodDrinks = checklist ?
+        <AccordionCard checklist={checklist} category={"Food & Drinks"}/> : null;
+    const accordionCardClothing = checklist ?
+        <AccordionCard checklist={checklist} category={"Clothing"}/> : null;
+    const accordionCardHygiene = checklist ?
+        <AccordionCard checklist={checklist} category={"Hygiene/Toiletries"}/> : null;
+    const accordionCardAdditionalItems = checklist ?
+        <AccordionCard checklist={checklist} category={"Additional Items"}/> : null;
+
 
     return (
         <div>
@@ -59,62 +67,11 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
                     {isEditMode ? (headlineCardEditMode) : headlineCard}
                 </Card>
                 <Typography gutterBottom variant="h6" margin={1}>Checklist</Typography>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography>Bike Gear</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Bike Gear Items
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                    >
-                        <Typography>Food & Drinks</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Food & Drinks Items
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel3a-content"
-                        id="panel3a-header"
-                    >
-                        <Typography>Clothing</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Clothing Items
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel4a-content"
-                        id="panel4a-header"
-                    >
-                        <Typography>Hygiene/ Toiletries</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Hygiene/ Toiletries Items
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
+                {accordionCardBikeGear}
+                {accordionCardFoodDrinks}
+                {accordionCardClothing}
+                {accordionCardHygiene}
+                {accordionCardAdditionalItems}
             </Layout>
         </div>
     );

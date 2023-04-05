@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Checklist;
+import com.example.backend.model.Item;
 import com.example.backend.repository.ChecklistRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -13,6 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -30,8 +32,10 @@ class ChecklistControllerTest {
     String testId = "Some test ID";
     String testDestination = "testDestination";
     LocalDate testLocalDate = LocalDate.of(2024, 1, 8);
+    Item testItem = new Item("ItemTestId", "Helmet", false, "Bike Gear");
+    List<Item> testItems = List.of(testItem);
 
-    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate);
+    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems);
 
 
     @Nested

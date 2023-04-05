@@ -10,10 +10,10 @@ function useChecklistsApi() {
 
 
     useEffect(() => {
-        fetchBikes()
+        fetchChecklists()
     }, [])
 
-    function fetchBikes() {
+    function fetchChecklists() {
         setLoading(true)
         axios
             .get(apiUrlSlug)

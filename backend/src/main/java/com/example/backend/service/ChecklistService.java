@@ -15,8 +15,9 @@ import java.util.Optional;
 public class ChecklistService {
 
     private final ChecklistRepository checklistRepository;
-
     private final IdService idService;
+    private final DefaultItemsService defaultItemsService;
+
 
     public List<Checklist> getAllChecklists() {
         return checklistRepository.findAll();
@@ -24,7 +25,7 @@ public class ChecklistService {
 
     public Checklist addChecklist(ChecklistRequest incomingChecklist) {
         Checklist checklistToAdd =
-                new Checklist(idService.generateId(), incomingChecklist.destination(), incomingChecklist.startDate());
+                new Checklist(idService.generateId(), incomingChecklist.destination(), incomingChecklist.startDate(), defaultItemsService.getDefaultItems());
         return checklistRepository.save(checklistToAdd);
     }
 
@@ -42,7 +43,7 @@ public class ChecklistService {
         if (!checklistRepository.existsById(incomingChecklist.id())) {
             throw new NoSuchChecklistException();
         }
-        Checklist result = new Checklist(incomingChecklist.id(), incomingChecklist.destination(), incomingChecklist.startDate());
+        Checklist result = new Checklist(incomingChecklist.id(), incomingChecklist.destination(), incomingChecklist.startDate(), incomingChecklist.items());
         return checklistRepository.save(result);
     }
 }
