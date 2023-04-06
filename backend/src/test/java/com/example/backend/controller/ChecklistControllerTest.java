@@ -101,7 +101,7 @@ class ChecklistControllerTest {
         @Test
         @DirtiesContext
         @DisplayName("...should delete the checklist with the given id if it does exist in the database")
-        void deleteChecklist_deletesABikeIfTheBikeWithTheGivenIdDoesExist() throws Exception {
+        void deleteChecklist_deletesAChecklistIfTheChecklistWithTheGivenIdDoesExist() throws Exception {
             checklistRepository.save(testChecklist);
             mockMvc.perform(delete("/api/easy-bikepackr/lists/" + testChecklist.id()))
                     .andExpect(status().isOk())
@@ -129,7 +129,7 @@ class ChecklistControllerTest {
 
         @Test
         @DirtiesContext
-        @DisplayName("...should update the checklist and return it if there is a bike with the given id in the database")
+        @DisplayName("...should update the checklist and return it if there is a checklist with the given id in the database")
         void updateChecklist_returnsAChecklistIfThereIsAChecklistWithTheGivenId() throws Exception {
             //GIVEN
             checklistRepository.save(testChecklist);
@@ -147,8 +147,8 @@ class ChecklistControllerTest {
                     .andExpect(content().json("""
                                     {
                                     "id": "Some test ID",
-                                                         "destination": "updatedDestination",
-                                                         "startDate": "2025-01-08"
+                                    "destination": "updatedDestination",
+                                    "startDate": "2025-01-08"
                                     }
                             """));
         }
