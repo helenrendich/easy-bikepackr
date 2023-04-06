@@ -6,13 +6,33 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import {Box, Checkbox} from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import {Checklist} from "../../models/Checklist";
+import {Item} from "../../models/Item";
 
 type AccordionCardProps = {
     checklist: Checklist
     category: string
+    editItem: (listId: string, updatedItem: Item) => void
 }
 
 function AccordionCard(props: AccordionCardProps) {
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>, item: Item) => {
+        if (item.isTickedOff) {
+            props.editItem(props.checklist.id, {
+                id: item.id,
+                title: item.title,
+                isTickedOff: false,
+                category: item.category
+            });
+        } else {
+            props.editItem(props.checklist.id, {
+                id: item.id,
+                title: item.title,
+                isTickedOff: true,
+                category: item.category
+            });
+        }
+    }
 
     return (
         <Accordion>
@@ -28,7 +48,10 @@ function AccordionCard(props: AccordionCardProps) {
                     .filter(item => item.category.includes(props.category))
                     .map(item =>
                         <Box key={item.id} display="flex" alignItems="center">
-                            <Checkbox/>
+                            <Checkbox
+                                checked={item.isTickedOff}
+                                onChange={(event) => handleChange(event, item)}
+                            />
                             <Typography>{item.title}</Typography>
                         </Box>)}
             </AccordionDetails>

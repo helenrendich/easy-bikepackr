@@ -8,10 +8,12 @@ import {Box, Button, Card, CardActions, CardContent} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import EditHeadlineCard from "./EditChecklistDetails/EditHeadlineCard";
 import AccordionCard from "./AccordionCard";
+import {Item} from "../../models/Item";
 
 type ChecklistDetailsProps = {
     checklists: Checklist[]
     editChecklist: (updatedChecklist: Checklist) => void
+    editItem: (listId: string, updatedItem: Item) => void
 }
 
 function ChecklistDetails(props: ChecklistDetailsProps) {
@@ -49,15 +51,15 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
                           setIsEditMode={setIsEditMode}/> : null;
 
     const accordionCardBikeGear = checklist ?
-        <AccordionCard checklist={checklist} category={"Bike Gear"}/> : null;
+        <AccordionCard checklist={checklist} category={"Bike Gear"} editItem={props.editItem}/> : null;
     const accordionCardFoodDrinks = checklist ?
-        <AccordionCard checklist={checklist} category={"Food & Drinks"}/> : null;
+        <AccordionCard checklist={checklist} category={"Food & Drinks"} editItem={props.editItem}/> : null;
     const accordionCardClothing = checklist ?
-        <AccordionCard checklist={checklist} category={"Clothing"}/> : null;
+        <AccordionCard checklist={checklist} category={"Clothing"} editItem={props.editItem}/> : null;
     const accordionCardHygiene = checklist ?
-        <AccordionCard checklist={checklist} category={"Hygiene/Toiletries"}/> : null;
+        <AccordionCard checklist={checklist} category={"Hygiene/Toiletries"} editItem={props.editItem}/> : null;
     const accordionCardAdditionalItems = checklist ?
-        <AccordionCard checklist={checklist} category={"Additional Items"}/> : null;
+        <AccordionCard checklist={checklist} category={"Additional Items"} editItem={props.editItem}/> : null;
 
 
     return (
