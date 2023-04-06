@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {useEffect, useState} from "react";
 import {Checklist, NewChecklist} from "../models/Checklist";
+import {Item} from "../models/Item";
 
 const apiUrlSlug = '/api/easy-bikepackr/lists'
 
@@ -71,7 +72,20 @@ function useChecklistsApi() {
             })
     }
 
-    return {loading, checklists, addChecklist, deleteChecklist, editChecklist}
+    function editItem(listId: string, updatedItem: Item) {
+        setLoading(true)
+        axios
+            .put(apiUrlSlug + '/' + listId + '/items', updatedItem)
+            .then((response) => response.data)
+            .then((incomingChecklist: Checklist) => {
+                setChecklists([...checklists.filter((checklist) => checklist.id !== incomingChecklist.id), incomingChecklist])
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
+
+    return {loading, checklists, addChecklist, deleteChecklist, editChecklist, editItem}
 }
 
 export default useChecklistsApi

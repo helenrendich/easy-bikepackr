@@ -21,10 +21,10 @@ class ChecklistServiceTest {
 
     @Autowired
     ChecklistRepository checklistRepository;
-    IdService mockedIdService = mock(IdService.class);
-    DefaultItemsService defaultItemsService = mock(DefaultItemsService.class);
     @Autowired
     ChecklistService checklistService;
+    IdService mockedIdService = mock(IdService.class);
+    DefaultItemsService defaultItemsService = mock(DefaultItemsService.class);
 
     String testId = "Some test ID";
     String testDestination = "testDestination";
