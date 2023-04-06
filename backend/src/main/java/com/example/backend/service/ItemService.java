@@ -17,7 +17,18 @@ public class ItemService {
 
     public Item updateItem(String listId, ItemDTO itemToUpdateDTO) {
         Checklist checklistToUpdate = checklistRepository.findById(listId).orElseThrow(NoSuchChecklistException::new);
-        Item itemToUpdate = new Item(itemToUpdateDTO.id(), itemToUpdateDTO.title(), itemToUpdateDTO.isTickedOff(), itemToUpdateDTO.category());
+        Item itemToUpdate = new Item(
+                itemToUpdateDTO.id(),
+                itemToUpdateDTO.title(),
+                itemToUpdateDTO.isTickedOff(),
+                itemToUpdateDTO.category());
+
+        boolean itemExists = checklistToUpdate.items().stream()
+                .anyMatch(item -> item.id().equals(itemToUpdate.id()));
+
+        if (!itemExists) {
+            throw new NoSuchItemException();
+        }
 
         List<Item> updatedItems = checklistRepository.findById(listId)
                 .map(Checklist::items)
