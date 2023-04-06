@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class ItemService {
     private final ChecklistRepository checklistRepository;
 
-    public Item updateItem(String listId, ItemDTO itemToUpdateDTO) {
+    public Checklist updateItem(String listId, ItemDTO itemToUpdateDTO) {
         Checklist checklistToUpdate = checklistRepository.findById(listId).orElseThrow(NoSuchChecklistException::new);
         Item itemToUpdate = new Item(
                 itemToUpdateDTO.id(),
@@ -41,6 +41,6 @@ public class ItemService {
         Checklist updatedChecklist = new Checklist(checklistToUpdate.id(), checklistToUpdate.destination(), checklistToUpdate.startDate(), updatedItems);
         checklistRepository.save(updatedChecklist);
 
-        return itemToUpdate;
+        return updatedChecklist;
     }
 }

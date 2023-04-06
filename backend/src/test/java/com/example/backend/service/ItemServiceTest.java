@@ -28,9 +28,10 @@ class ItemServiceTest {
     LocalDate testLocalDate = LocalDate.of(2024, 1, 8);
     Item testItem = new Item("ItemTestId", "Helmet", false, "Bike Gear");
     ItemDTO testItemToUpdate = new ItemDTO("ItemTestId", "Helmet", true, "Bike Gear");
+    Item testItemUpdated = new Item("ItemTestId", "Helmet", true, "Bike Gear");
     ItemDTO testItemToUpdateWithNonExistingID = new ItemDTO("ItemFalseId", "Helmet", true, "Bike Gear");
     List<Item> testItems = List.of(testItem);
-
+    List<Item> testItemsUpdated = List.of(testItemUpdated);
     Checklist testChecklist = new Checklist(testListId, testDestination, testLocalDate, testItems);
 
     @Nested
@@ -63,9 +64,9 @@ class ItemServiceTest {
         void updateItem_updatesItemInASpecificChecklistInTheDatabase() {
             //GIVEN
             checklistRepository.save(testChecklist);
-            Item expected = new Item(testItem.id(), testItemToUpdate.title(), testItemToUpdate.isTickedOff(), testItemToUpdate.category());
+            Checklist expected = new Checklist(testChecklist.id(), testChecklist.destination(), testChecklist.startDate(), testItemsUpdated);
             //WHEN
-            Item actual = itemService.updateItem(testChecklist.id(), testItemToUpdate);
+            Checklist actual = itemService.updateItem(testChecklist.id(), testItemToUpdate);
             //THEN
             Assertions.assertEquals(expected, actual);
         }

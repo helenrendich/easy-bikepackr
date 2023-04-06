@@ -60,11 +60,18 @@ class ItemControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(content().json("""
                             {
-                                                                                           "id": "ItemTestId",
-                                                                                           "title": "Helmet",
-                                                                                           "isTickedOff": true,
-                                                                                           "category": "Bike Gear"
-                                                                                           }
+                                       "id": "Some test ID",
+                                       "destination": "testDestination",
+                                       "startDate": "2024-01-08",
+                                       "items": [
+                                               {
+                                                   "id": "ItemTestId",
+                                                   "title": "Helmet",
+                                                   "isTickedOff": true,
+                                                   "category": "Bike Gear"
+                                               }
+                                               ]
+                                    }
                             """));
         }
     }

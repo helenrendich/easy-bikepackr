@@ -1,6 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.Item;
+import com.example.backend.model.Checklist;
 import com.example.backend.model.ItemDTO;
 import com.example.backend.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @PutMapping("/items")
-    public Item updateItem(@PathVariable String listId, @RequestBody ItemDTO itemToUpdate) {
+    public Checklist updateItem(@PathVariable String listId, @RequestBody ItemDTO itemToUpdate) {
         return itemService.updateItem(listId, itemToUpdate);
     }
 }
