@@ -1,5 +1,6 @@
 import React, {ReactNode} from 'react'
-import Header from '../Header/Header'
+import Header from './Header'
+import BottomNavigation from "./BottomNavigation";
 
 type Props = {
     children: ReactNode
@@ -10,6 +11,7 @@ function Layout(props: Props) {
         <>
             <Header/>
             <main className="main">{props.children}</main>
+            <BottomNavigation/>
         </>
     )
 }

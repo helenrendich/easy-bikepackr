@@ -46,6 +46,7 @@ function AccordionCard(props: AccordionCardProps) {
             <AccordionDetails>
                 {props.checklist?.items
                     .filter(item => item.category.includes(props.category))
+                    .sort((a, b) => a.title.localeCompare(b.title))
                     .map(item =>
                         <Box key={item.id} display="flex" alignItems="center">
                             <Checkbox
