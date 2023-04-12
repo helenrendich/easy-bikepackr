@@ -10,7 +10,7 @@ function Layout(props: Props) {
     return (
         <>
             <Header/>
-            <main className="main">{props.children}</main>
+            <main style={{paddingBottom: '250px'}} className="main">{props.children}</main>
             <BottomNavigation/>
         </>
     )

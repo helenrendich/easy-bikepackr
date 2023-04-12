@@ -22,7 +22,7 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
             >
                 <Box display="flex"
                      justifyContent="center">
-                    <Typography variant="h4" sx={{textAlign: 'center', margin: 1}}> Adventure Checklists</Typography>
+                    <Typography fontSize={"h4"} sx={{textAlign: 'center', margin: 1}}> Adventure Checklists</Typography>
                 </Box>
                 {props.checklists.map((checklist) => (
                     <ChecklistCard key={checklist.id} checklist={checklist} deleteChecklist={props.deleteChecklist}/>
@@ -30,7 +30,7 @@ function ChecklistGallery(props: ChecklistGalleryProps) {
                 <Box display="flex"
                      justifyContent="center">
                     <Link to="add">
-                        <IconButton sx={{minHeight: 55, minWidth: 55}}>
+                        <IconButton color={"primary"} sx={{minHeight: 55, minWidth: 55, padding: 2}}>
                             <AddCircle sx={{minHeight: 55, minWidth: 55}}/>
                         </IconButton>
                     </Link>

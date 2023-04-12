@@ -60,11 +60,11 @@ function EditHeadlineCard(props: EditHeadlineCardProps) {
                     onChange={handleDateChange}
                 />
             </LocalizationProvider>
-            <CardActions sx={{justifyContent: "flex-end", color: "black"}}>
+            <CardActions sx={{justifyContent: "flex-end"}}>
                 <Button onClick={handleUpdateSave}>
                     <SaveIcon color="action"/>
                 </Button>
-                <Button onClick={handleUpdateCancel} sx={{color: 'black',}}>
+                <Button onClick={handleUpdateCancel}>
                     <ClearIcon color="action"/>
                 </Button>
             </CardActions>
