@@ -30,8 +30,8 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
 
     const headlineCard = (
         <CardContent>
-            <Box display="flex" flexDirection="row" alignItems="flex-end">
-                <Typography gutterBottom variant="h5" component="div">
+            <Box display="flex" flexDirection="row" alignItems="flex-end" justifyContent="space-between">
+                <Typography fontSize={30} gutterBottom variant="h5" component="div">
                     {checklist?.destination}
                 </Typography>
                 <CardActions>
@@ -40,7 +40,7 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
                     </Button>
                 </CardActions>
             </Box>
-            <Typography variant="body2" color="text.secondary">
+            <Typography fontSize={20} variant="body2" color="text.secondary">
                 {dateDate?.toLocaleDateString("en-GB")}
             </Typography>
         </CardContent>
@@ -68,7 +68,6 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
                 <Card>
                     {isEditMode ? (headlineCardEditMode) : headlineCard}
                 </Card>
-                <Typography gutterBottom variant="h6" margin={1}>Checklist</Typography>
                 {accordionCardBikeGear}
                 {accordionCardFoodDrinks}
                 {accordionCardClothing}

@@ -3,10 +3,11 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import {Box, Checkbox} from "@mui/material";
+import {Box, Button, CardActions, Checkbox} from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import {Checklist} from "../../models/Checklist";
 import {Item} from "../../models/Item";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 type AccordionCardProps = {
     checklist: Checklist
@@ -41,19 +42,26 @@ function AccordionCard(props: AccordionCardProps) {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <Typography>{props.category}</Typography>
+                <Typography fontSize={25}>{props.category}</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 {props.checklist?.items
                     .filter(item => item.category.includes(props.category))
                     .sort((a, b) => a.title.localeCompare(b.title))
                     .map(item =>
-                        <Box key={item.id} display="flex" alignItems="center">
-                            <Checkbox
-                                checked={item.isTickedOff}
-                                onChange={(event) => handleChange(event, item)}
-                            />
-                            <Typography>{item.title}</Typography>
+                        <Box key={item.id} display="flex" alignItems="center" justifyContent="space-between" margin={1}>
+                            <Box display="flex" alignItems="center">
+                                <Checkbox
+                                    checked={item.isTickedOff}
+                                    onChange={(event) => handleChange(event, item)}
+                                />
+                                <Typography fontSize={20}>{item.title}</Typography>
+                            </Box>
+                            <CardActions>
+                                <Button>
+                                    <BorderColorIcon color="warning"/>
+                                </Button>
+                            </CardActions>
                         </Box>)}
             </AccordionDetails>
         </Accordion>
