@@ -7,7 +7,7 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Button from '@mui/material/Button';
 import {NewChecklist} from "../../models/Checklist";
 import dayjs from 'dayjs';
-import {Box, Container, Typography} from "@mui/material";
+import {Box, Container, FormControlLabel, Switch, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import Layout from "../Layout/Layout";
 
@@ -18,6 +18,7 @@ type AddChecklistProps = {
 function AddChecklist(props: AddChecklistProps) {
     const [inputDestination, setInputDestination] = useState<string>("")
     const [inputStartDate, setInputStartDate] = useState<string>("")
+    const [isChecked, setIsChecked] = useState<boolean>(false);
 
     function handleDestinationChange(event: ChangeEvent<HTMLInputElement>) {
         setInputDestination(event.target.value)
@@ -29,8 +30,17 @@ function AddChecklist(props: AddChecklistProps) {
     }
 
     function handleSubmit() {
-        const newChecklist: NewChecklist = {destination: inputDestination, startDate: inputStartDate}
+        const newChecklist: NewChecklist = {
+            destination: inputDestination,
+            startDate: inputStartDate,
+            isCamping: isChecked
+        }
+        console.log(isChecked)
         props.addChecklist(newChecklist).then(r => setInputDestination(""))
+    }
+
+    function handleSwitchChange() {
+        setIsChecked(!isChecked);
     }
 
     return (
@@ -64,6 +74,13 @@ function AddChecklist(props: AddChecklistProps) {
                             onChange={handleDateChange}
                         />
                     </LocalizationProvider>
+
+                    <FormControlLabel control={<Switch
+                        checked={isChecked}
+                        onChange={handleSwitchChange}
+                        inputProps={{'aria-label': 'controlled'}}
+                    />} label="Camping"/>
+
 
                     <Link to="/">
                         <Button sx={
