@@ -24,10 +24,10 @@ function ChecklistCard(props: ChecklistCardProps) {
         <React.Fragment>
             <Link href={"details/" + props.checklist.id} underline={'none'}>
                 <CardContent>
-                    <Typography variant="h5" component="div" margin={2}>
+                    <Typography fontSize={"h5"} component="div" margin={2}>
                         {props.checklist.destination}
                     </Typography>
-                    <Typography sx={{fontSize: 17}} color="text.secondary" gutterBottom>
+                    <Typography fontSize={"h7"} color="text.secondary" gutterBottom>
                         {dateDate.toLocaleDateString("en-GB")}
                     </Typography>
                 </CardContent>
