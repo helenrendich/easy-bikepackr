@@ -21,24 +21,24 @@ type AccordionCardProps = {
 function AccordionCard(props: AccordionCardProps) {
 
     const [isEditItemMode, setIsEditItemMode] = useState<boolean>(false);
-    const [editingItemId, setEditingItemId] = useState<string>("");
+    const [currentItemId, setCurrentItemId] = useState<string>("");
     const [updatedTitle, setUpdatedTitle] = useState<string>("");
 
     useEffect(() => {
-        const currentItem = props.checklist.items.find(item => item.id === editingItemId);
+        const currentItem = props.checklist.items.find(item => item.id === currentItemId);
         if (isEditItemMode && currentItem) {
             setUpdatedTitle(currentItem.title);
         }
-    }, [isEditItemMode, editingItemId, props.checklist.items]);
+    }, [isEditItemMode, currentItemId, props.checklist.items]);
 
     function handleEditClick(itemId: string) {
         setIsEditItemMode(true);
-        setEditingItemId(itemId);
+        setCurrentItemId(itemId);
     }
 
     function handleEditCancel() {
         setIsEditItemMode(false);
-        setEditingItemId("");
+        setCurrentItemId("");
     }
 
     function handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -47,7 +47,7 @@ function AccordionCard(props: AccordionCardProps) {
 
     function handleTitleSave(item: Item) {
         setIsEditItemMode(false);
-        setEditingItemId("");
+        setCurrentItemId("");
         props.editItem(props.checklist.id, {
             id: item.id,
             title: updatedTitle,
@@ -57,21 +57,12 @@ function AccordionCard(props: AccordionCardProps) {
     }
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, item: Item) => {
-        if (item.isTickedOff) {
-            props.editItem(props.checklist.id, {
-                id: item.id,
-                title: item.title,
-                isTickedOff: false,
-                category: item.category
-            });
-        } else {
-            props.editItem(props.checklist.id, {
-                id: item.id,
-                title: item.title,
-                isTickedOff: true,
-                category: item.category
-            });
-        }
+        props.editItem(props.checklist.id, {
+            id: item.id,
+            title: item.title,
+            isTickedOff: !item.isTickedOff,
+            category: item.category
+        });
     }
 
 
@@ -89,7 +80,7 @@ function AccordionCard(props: AccordionCardProps) {
                     .filter(item => item.category.includes(props.category))
                     .sort((a, b) => a.title.localeCompare(b.title))
                     .map(item =>
-                        isEditItemMode && item.id === editingItemId ?
+                        isEditItemMode && item.id === currentItemId ?
                             <Box key={item.id} display="flex" alignItems="center" justifyContent="space-between"
                                  margin={1}>
                                 <TextField value={updatedTitle} onChange={handleTitleChange}/>
