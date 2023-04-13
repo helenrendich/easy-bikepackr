@@ -8,6 +8,7 @@ public record ChecklistDTO(
         String id,
         String destination,
         LocalDate startDate,
-        List<Item> items
+        List<Item> items,
+        boolean isCamping
 ) {
 }

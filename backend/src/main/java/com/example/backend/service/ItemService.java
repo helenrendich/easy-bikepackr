@@ -38,7 +38,7 @@ public class ItemService {
                 .collect(Collectors.toList());
         updatedItems.add(itemToUpdate);
 
-        Checklist updatedChecklist = new Checklist(checklistToUpdate.id(), checklistToUpdate.destination(), checklistToUpdate.startDate(), updatedItems);
+        Checklist updatedChecklist = new Checklist(checklistToUpdate.id(), checklistToUpdate.destination(), checklistToUpdate.startDate(), updatedItems, false);
         checklistRepository.save(updatedChecklist);
 
         return updatedChecklist;

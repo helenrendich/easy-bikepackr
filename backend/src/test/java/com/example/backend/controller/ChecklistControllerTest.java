@@ -35,7 +35,7 @@ class ChecklistControllerTest {
     Item testItem = new Item("ItemTestId", "Helmet", false, "Bike Gear");
     List<Item> testItems = List.of(testItem);
 
-    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems);
+    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems, false);
 
 
     @Nested

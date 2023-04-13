@@ -34,9 +34,9 @@ class ChecklistServiceTest {
     Item testItem = new Item("ItemTestId", "Helmet", false, "Bike Gear");
     List<Item> testItems = List.of(testItem);
 
-    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems);
-    ChecklistDTO testChecklistUpdated = new ChecklistDTO(testId, testDestinationUpdated, testLocalDateUpdated, testItems);
-    ChecklistRequest testChecklistRequest = new ChecklistRequest(testDestination, testLocalDate);
+    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems, false);
+    ChecklistDTO testChecklistUpdated = new ChecklistDTO(testId, testDestinationUpdated, testLocalDateUpdated, testItems, false);
+    ChecklistRequest testChecklistRequest = new ChecklistRequest(testDestination, testLocalDate, false);
 
     @BeforeEach
     @DisplayName("set up test environment")
@@ -139,7 +139,7 @@ class ChecklistServiceTest {
         void updateChecklist_updatesChecklistInTheDatabaseIfTheChecklistWithTheGivenIdDoesExist() {
             //GIVEN
             checklistRepository.save(testChecklist);
-            Checklist expected = new Checklist(testChecklist.id(), testChecklistUpdated.destination(), testChecklistUpdated.startDate(), testItems);
+            Checklist expected = new Checklist(testChecklist.id(), testChecklistUpdated.destination(), testChecklistUpdated.startDate(), testItems, false);
             //WHEN
             Checklist actual = checklistService.updateChecklist(testChecklistUpdated);
             //THEN
