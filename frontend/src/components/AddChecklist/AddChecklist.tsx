@@ -29,18 +29,17 @@ function AddChecklist(props: AddChecklistProps) {
         setInputStartDate(formattedDate);
     }
 
+    function handleSwitchChange() {
+        setIsChecked(!isChecked);
+    }
+
     function handleSubmit() {
         const newChecklist: NewChecklist = {
             destination: inputDestination,
             startDate: inputStartDate,
             isCamping: isChecked
         }
-        console.log(isChecked)
         props.addChecklist(newChecklist).then(r => setInputDestination(""))
-    }
-
-    function handleSwitchChange() {
-        setIsChecked(!isChecked);
     }
 
     return (
