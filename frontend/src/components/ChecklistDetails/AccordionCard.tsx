@@ -7,15 +7,17 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import {Box, Button, CardActions, Checkbox, TextField} from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import {Checklist} from "../../models/Checklist";
-import {Item} from "../../models/Item";
+import {Item, NewItem} from "../../models/Item";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import AddItem from "./AddItem";
 
 type AccordionCardProps = {
     checklist: Checklist
     category: string
     editItem: (listId: string, updatedItem: Item) => void
+    addItem: (listId: string, itemToAdd: NewItem) => void
 }
 
 function AccordionCard(props: AccordionCardProps) {
@@ -110,6 +112,7 @@ function AccordionCard(props: AccordionCardProps) {
                                 </CardActions>
                             </Box>
                     )}
+                <AddItem checklist={props.checklist} category={props.category} addItem={props.addItem}/>
             </AccordionDetails>
         </Accordion>
     );
