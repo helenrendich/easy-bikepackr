@@ -4,3 +4,5 @@ export type Item = {
     isTickedOff: boolean
     category: string
 }
+
+export type NewItem = Omit<Item, "id" | "isTickedOff">

@@ -24,7 +24,7 @@ class ChecklistServiceTest {
     @Autowired
     ChecklistService checklistService;
     IdService mockedIdService = mock(IdService.class);
-    DefaultItemsService defaultItemsService = mock(DefaultItemsService.class);
+    DefaultItemsService mockedDefaultItemsService = mock(DefaultItemsService.class);
 
     String testId = "Some test ID";
     String testDestination = "testDestination";
@@ -41,9 +41,9 @@ class ChecklistServiceTest {
     @BeforeEach
     @DisplayName("set up test environment")
     void setUp() {
-        checklistService = new ChecklistService(checklistRepository, mockedIdService, defaultItemsService);
+        checklistService = new ChecklistService(checklistRepository, mockedIdService, mockedDefaultItemsService);
         when(mockedIdService.generateId()).thenReturn(testChecklist.id());
-        when(defaultItemsService.getDefaultItems()).thenReturn(testItems);
+        when(mockedDefaultItemsService.getDefaultItems()).thenReturn(testItems);
     }
 
     @Nested
@@ -89,7 +89,7 @@ class ChecklistServiceTest {
             Checklist actual = checklistService.addChecklist(testChecklistRequest);
             //THEN
             verify(mockedIdService).generateId();
-            verify(defaultItemsService).getDefaultItems();
+            verify(mockedDefaultItemsService).getDefaultItems();
             Assertions.assertEquals(expected, actual);
         }
     }

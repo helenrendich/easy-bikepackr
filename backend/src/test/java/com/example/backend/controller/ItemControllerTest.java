@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,10 +40,10 @@ class ItemControllerTest {
 
     @Nested
     @DisplayName("PUT /api/easy-bikepackr/lists/{listId}/items")
-    class testPutChecklist {
+    class testPutItem {
         @Test
-        @DisplayName("...should update the item in a specific checklist and return the item")
-        void updateItem_returnsAItemIfThereAreItemAndChecklistWitGivenIds() throws Exception {
+        @DisplayName("...should update the item in a specific checklist and return the updated checklist")
+        void updateItem_returnsAChecklistIfThereAreItemAndChecklistWitGivenIds() throws Exception {
             //GIVEN
             checklistRepository.save(testChecklist);
             //WHEN + THEN
@@ -70,7 +71,50 @@ class ItemControllerTest {
                                                    "isTickedOff": true,
                                                    "category": "Bike Gear"
                                                }
-                                               ]
+                                               ],
+                                       "isCamping":false
+                                    }
+                            """));
+        }
+    }
+
+    @Nested
+    @DisplayName("POST /api/easy-bikepackr/lists/{listId}/items")
+    class testPostItem {
+        @Test
+        @DisplayName("...should add the item in a specific checklist and return the updated checklist")
+        void addItem_returnsTheUpdatedChecklistWithTheAddedItem() throws Exception {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+            //WHEN+THEN
+            mockMvc.perform(post("/api/easy-bikepackr/lists/" + testChecklist.id() + "/items")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("""
+                                    {
+                                                                                                                               "title": "NewItem",
+                                                                                                                               "category": "Bike Gear"
+                                                                                                                               }
+                                    """))
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("""
+                            {
+                                       "id": "Some test ID",
+                                       "destination": "testDestination",
+                                       "startDate": "2024-01-08",
+                                       "items": [
+                                               {
+                                                   "id": "ItemTestId",
+                                                   "title": "Helmet",
+                                                   "isTickedOff": false,
+                                                   "category": "Bike Gear"
+                                               },
+                                               {
+                                                   "title": "NewItem",
+                                                   "isTickedOff": false,
+                                                   "category": "Bike Gear"
+                                               }
+                                               ],
+                                       "isCamping":false
                                     }
                             """));
         }
