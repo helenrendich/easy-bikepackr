@@ -23,4 +23,9 @@ public class ItemController {
     public Checklist addItem(@PathVariable String listId, @RequestBody ItemRequest itemRequest) {
         return itemService.addItem(listId, itemRequest);
     }
+
+    @DeleteMapping("/items/{itemId}")
+    public Checklist deleteItem(@PathVariable String listId, @PathVariable String itemId) {
+        return itemService.deleteItem(listId, itemId);
+    }
 }
