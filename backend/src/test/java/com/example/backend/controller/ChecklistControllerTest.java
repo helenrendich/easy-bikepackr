@@ -35,7 +35,7 @@ class ChecklistControllerTest {
     Item testItem = new Item("ItemTestId", "Helmet", false, "Bike Gear");
     List<Item> testItems = List.of(testItem);
 
-    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems);
+    Checklist testChecklist = new Checklist(testId, testDestination, testLocalDate, testItems, false);
 
 
     @Nested
@@ -80,14 +80,16 @@ class ChecklistControllerTest {
                             .content("""
                                     {
                                         "destination": "testDestination",
-                                        "startDate": "2024-01-08"
+                                        "startDate": "2024-01-08",
+                                        "isCamping": false
                                     }
                                     """))
                     .andExpect(status().isCreated())
                     .andExpect(content().json("""
                             {
                                 "destination": "testDestination",
-                                "startDate": "2024-01-08"
+                                "startDate": "2024-01-08",
+                                "isCamping": false
                             }
                             """))
                     .andExpect(jsonPath("$.id").isNotEmpty());

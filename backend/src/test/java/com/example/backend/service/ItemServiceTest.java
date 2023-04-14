@@ -32,7 +32,7 @@ class ItemServiceTest {
     ItemDTO testItemToUpdateWithNonExistingID = new ItemDTO("ItemFalseId", "Helmet", true, "Bike Gear");
     List<Item> testItems = List.of(testItem);
     List<Item> testItemsUpdated = List.of(testItemUpdated);
-    Checklist testChecklist = new Checklist(testListId, testDestination, testLocalDate, testItems);
+    Checklist testChecklist = new Checklist(testListId, testDestination, testLocalDate, testItems, false);
 
     @Nested
     @DisplayName("testing updateItem()")
@@ -64,7 +64,7 @@ class ItemServiceTest {
         void updateItem_updatesItemInASpecificChecklistInTheDatabase() {
             //GIVEN
             checklistRepository.save(testChecklist);
-            Checklist expected = new Checklist(testChecklist.id(), testChecklist.destination(), testChecklist.startDate(), testItemsUpdated);
+            Checklist expected = new Checklist(testChecklist.id(), testChecklist.destination(), testChecklist.startDate(), testItemsUpdated, false);
             //WHEN
             Checklist actual = itemService.updateItem(testChecklist.id(), testItemToUpdate);
             //THEN

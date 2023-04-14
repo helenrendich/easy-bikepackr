@@ -52,6 +52,8 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
 
     const accordionCardBikeGear = checklist ?
         <AccordionCard checklist={checklist} category={"Bike Gear"} editItem={props.editItem}/> : null;
+    const accordionCardCamping = checklist ?
+        <AccordionCard checklist={checklist} category={"Camping"} editItem={props.editItem}/> : null;
     const accordionCardFoodDrinks = checklist ?
         <AccordionCard checklist={checklist} category={"Food & Drinks"} editItem={props.editItem}/> : null;
     const accordionCardClothing = checklist ?
@@ -69,6 +71,7 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
                     {isEditMode ? (headlineCardEditMode) : headlineCard}
                 </Card>
                 {accordionCardBikeGear}
+                {checklist?.isCamping && accordionCardCamping}
                 {accordionCardFoodDrinks}
                 {accordionCardClothing}
                 {accordionCardHygiene}

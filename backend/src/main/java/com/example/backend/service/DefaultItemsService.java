@@ -19,6 +19,7 @@ public class DefaultItemsService {
         String categoryClothing = "Clothing";
         String categoryHygiene = "Hygiene/Toiletries";
         String categoryAdditional = "Additional Items";
+        String categoryCamping = "Camping";
 
         defaultItems.add(new Item(idService.generateId(), "Helmet", false, categoryBikeGear));
         defaultItems.add(new Item(idService.generateId(), "Cycle Glasses", false, categoryBikeGear));
@@ -45,6 +46,11 @@ public class DefaultItemsService {
         defaultItems.add(new Item(idService.generateId(), "Spare Tubes", false, categoryAdditional));
         defaultItems.add(new Item(idService.generateId(), "Headlamp", false, categoryAdditional));
         defaultItems.add(new Item(idService.generateId(), "Passport", false, categoryAdditional));
+
+        defaultItems.add(new Item(idService.generateId(), "Tent", false, categoryCamping));
+        defaultItems.add(new Item(idService.generateId(), "Sleeping Bag", false, categoryCamping));
+        defaultItems.add(new Item(idService.generateId(), "Sleeping Pad", false, categoryCamping));
+        defaultItems.add(new Item(idService.generateId(), "Pillow", false, categoryCamping));
 
         return defaultItems;
     }

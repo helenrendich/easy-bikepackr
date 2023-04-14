@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public record ChecklistRequest(
         String destination,
-        LocalDate startDate
+        LocalDate startDate,
+        boolean isCamping
 ) {
 }

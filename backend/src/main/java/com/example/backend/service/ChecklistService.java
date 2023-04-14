@@ -25,7 +25,7 @@ public class ChecklistService {
 
     public Checklist addChecklist(ChecklistRequest incomingChecklist) {
         Checklist checklistToAdd =
-                new Checklist(idService.generateId(), incomingChecklist.destination(), incomingChecklist.startDate(), defaultItemsService.getDefaultItems());
+                new Checklist(idService.generateId(), incomingChecklist.destination(), incomingChecklist.startDate(), defaultItemsService.getDefaultItems(), incomingChecklist.isCamping());
         return checklistRepository.save(checklistToAdd);
     }
 
@@ -43,7 +43,7 @@ public class ChecklistService {
         if (!checklistRepository.existsById(incomingChecklist.id())) {
             throw new NoSuchChecklistException();
         }
-        Checklist result = new Checklist(incomingChecklist.id(), incomingChecklist.destination(), incomingChecklist.startDate(), incomingChecklist.items());
+        Checklist result = new Checklist(incomingChecklist.id(), incomingChecklist.destination(), incomingChecklist.startDate(), incomingChecklist.items(), incomingChecklist.isCamping());
         return checklistRepository.save(result);
     }
 }

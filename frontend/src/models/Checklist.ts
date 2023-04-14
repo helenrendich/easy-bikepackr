@@ -5,6 +5,7 @@ export type Checklist = {
     destination: string
     startDate: string
     items: Item[]
+    isCamping: boolean
 }
 
 export type NewChecklist = Omit<Checklist, "id" | "items">
