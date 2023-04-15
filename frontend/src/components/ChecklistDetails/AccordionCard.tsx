@@ -9,6 +9,7 @@ import Accordion from "@mui/material/Accordion";
 import {Checklist} from "../../models/Checklist";
 import {Item, NewItem} from "../../models/Item";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import AddItem from "./AddItem";
@@ -18,6 +19,7 @@ type AccordionCardProps = {
     category: string
     editItem: (listId: string, updatedItem: Item) => void
     addItem: (listId: string, itemToAdd: NewItem) => void
+    deleteItem: (listId: string, itemId: string) => void
 }
 
 function AccordionCard(props: AccordionCardProps) {
@@ -67,6 +69,10 @@ function AccordionCard(props: AccordionCardProps) {
         });
     }
 
+    function handleDelete(itemId: string) {
+        props.deleteItem(props.checklist.id, itemId)
+    }
+
 
     return (
         <Accordion>
@@ -108,6 +114,9 @@ function AccordionCard(props: AccordionCardProps) {
                                 <CardActions>
                                     <Button onClick={() => handleEditClick(item.id)}>
                                         <BorderColorIcon color="action"/>
+                                    </Button>
+                                    <Button onClick={() => handleDelete(item.id)}>
+                                        <DeleteForeverIcon color="action"/>
                                     </Button>
                                 </CardActions>
                             </Box>

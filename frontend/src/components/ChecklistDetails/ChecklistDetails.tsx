@@ -15,6 +15,7 @@ type ChecklistDetailsProps = {
     editChecklist: (updatedChecklist: Checklist) => void
     editItem: (listId: string, updatedItem: Item) => void
     addItem: (listId: string, itemToAdd: NewItem) => void
+    deleteItem: (listId: string, itemId: string) => void
 }
 
 function ChecklistDetails(props: ChecklistDetailsProps) {
@@ -53,22 +54,22 @@ function ChecklistDetails(props: ChecklistDetailsProps) {
 
     const accordionCardBikeGear = checklist ?
         <AccordionCard checklist={checklist} category={"Bike Gear"} editItem={props.editItem}
-                       addItem={props.addItem}/> : null;
+                       addItem={props.addItem} deleteItem={props.deleteItem}/> : null;
     const accordionCardCamping = checklist ?
         <AccordionCard checklist={checklist} category={"Camping"} editItem={props.editItem}
-                       addItem={props.addItem}/> : null;
+                       addItem={props.addItem} deleteItem={props.deleteItem}/> : null;
     const accordionCardFoodDrinks = checklist ?
         <AccordionCard checklist={checklist} category={"Food & Drinks"} editItem={props.editItem}
-                       addItem={props.addItem}/> : null;
+                       addItem={props.addItem} deleteItem={props.deleteItem}/> : null;
     const accordionCardClothing = checklist ?
         <AccordionCard checklist={checklist} category={"Clothing"} editItem={props.editItem}
-                       addItem={props.addItem}/> : null;
+                       addItem={props.addItem} deleteItem={props.deleteItem}/> : null;
     const accordionCardHygiene = checklist ?
         <AccordionCard checklist={checklist} category={"Hygiene/Toiletries"} editItem={props.editItem}
-                       addItem={props.addItem}/> : null;
+                       addItem={props.addItem} deleteItem={props.deleteItem}/> : null;
     const accordionCardAdditionalItems = checklist ?
         <AccordionCard checklist={checklist} category={"Additional Items"} editItem={props.editItem}
-                       addItem={props.addItem}/> : null;
+                       addItem={props.addItem} deleteItem={props.deleteItem}/> : null;
 
 
     return (

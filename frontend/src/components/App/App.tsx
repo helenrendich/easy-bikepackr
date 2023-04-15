@@ -9,7 +9,7 @@ import {amber, teal} from "@mui/material/colors";
 
 
 function App() {
-    const {checklists, addChecklist, deleteChecklist, editChecklist, editItem, addItem} = useChecklistsApi()
+    const {checklists, addChecklist, deleteChecklist, editChecklist, editItem, addItem, deleteItem} = useChecklistsApi()
     const theme = createTheme({
         palette: {
             primary: teal,
@@ -30,7 +30,7 @@ function App() {
                 <Route path="/add" element={<AddChecklist addChecklist={addChecklist}/>}/>
                 <Route path="/details/:id"
                        element={<ChecklistDetails checklists={checklists} editChecklist={editChecklist}
-                                                  editItem={editItem} addItem={addItem}/>}/>
+                                                  editItem={editItem} addItem={addItem} deleteItem={deleteItem}/>}/>
             </Routes>
         </ThemeProvider>
     );
