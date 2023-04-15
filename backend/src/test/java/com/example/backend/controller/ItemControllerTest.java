@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -114,6 +113,29 @@ class ItemControllerTest {
                                                    "category": "Bike Gear"
                                                }
                                                ],
+                                       "isCamping":false
+                                    }
+                            """));
+        }
+    }
+
+    @Nested
+    @DisplayName("DELETE /api/easy-bikepackr/lists/{listId}/items/{itemId}")
+    class testDeleteItem {
+        @Test
+        @DisplayName("...should delete the item in a specific checklist and return the updated checklist")
+        void addItem_returnsTheUpdatedChecklistWithoutTheDeletedItem() throws Exception {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+            //WHEN+THEN
+            mockMvc.perform(delete("/api/easy-bikepackr/lists/" + testChecklist.id() + "/items/" + testItem.id()))
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("""
+                            {
+                                       "id": "Some test ID",
+                                       "destination": "testDestination",
+                                       "startDate": "2024-01-08",
+                                       "items": [],
                                        "isCamping":false
                                     }
                             """));
