@@ -98,7 +98,21 @@ function useChecklistsApi() {
             })
     }
 
-    return {loading, checklists, addChecklist, deleteChecklist, editChecklist, editItem, addItem}
+    function deleteItem(listId: string, itemId: string) {
+        setLoading(true)
+        axios
+            .delete(apiUrlSlug + '/' + listId + '/items/' + itemId)
+            .then((response) => response.data)
+            .then((incomingChecklist: Checklist) => {
+                setChecklists([...checklists.filter((checklist) => checklist.id !== incomingChecklist.id), incomingChecklist])
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
+
+
+    return {loading, checklists, addChecklist, deleteChecklist, editChecklist, editItem, addItem, deleteItem}
 }
 
 export default useChecklistsApi

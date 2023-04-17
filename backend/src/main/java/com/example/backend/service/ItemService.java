@@ -68,4 +68,27 @@ public class ItemService {
 
         return updatedChecklist;
     }
+
+    public Checklist deleteItem(String listId, String itemId) {
+        Checklist checklistToUpdate = checklistRepository.findById(listId).orElseThrow(NoSuchChecklistException::new);
+
+        boolean itemExists = checklistToUpdate.items().stream()
+                .anyMatch(item -> item.id().equals(itemId));
+
+        if (!itemExists) {
+            throw new NoSuchItemException();
+        }
+
+        List<Item> updatedItems = checklistRepository.findById(listId)
+                .map(Checklist::items)
+                .orElseThrow()
+                .stream()
+                .filter(item -> !item.id().equals(itemId))
+                .toList();
+
+        Checklist updatedChecklist = new Checklist(checklistToUpdate.id(), checklistToUpdate.destination(), checklistToUpdate.startDate(), updatedItems, checklistToUpdate.isCamping());
+        checklistRepository.save(updatedChecklist);
+
+        return updatedChecklist;
+    }
 }

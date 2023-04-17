@@ -40,6 +40,7 @@ class ItemServiceTest {
     List<Item> testItemsUpdated = List.of(testItemUpdated);
     Checklist testChecklist = new Checklist(testListId, testDestination, testLocalDate, testItems, false);
     Checklist testChecklistWithNewItem = new Checklist(testListId, testDestination, testLocalDate, testItemsWithNewItem, false);
+    Checklist testChecklistNoItems = new Checklist(testListId, testDestination, testLocalDate, List.of(), false);
     List<String> validCategories = List.of("Bike Gear");
 
     @BeforeEach
@@ -122,6 +123,44 @@ class ItemServiceTest {
             Checklist expected = testChecklistWithNewItem;
             //WHEN
             Checklist actual = itemService.addItem(testListId, testItemRequest);
+            //THEN
+            Assertions.assertEquals(expected, actual);
+        }
+    }
+
+    @Nested
+    @DisplayName("delete addItem()")
+    class deleteItemTest {
+        @Test
+        @DirtiesContext
+        @DisplayName("...throws an exception if the checklist with the given id does not exist")
+        void deleteItem_throwsExceptionIfTheChecklistWithTheGivenIdDoesNotExist() {
+            //GIVEN
+            Class<NoSuchChecklistException> expected = NoSuchChecklistException.class;
+            //WHEN+THEN
+            Assertions.assertThrows(expected, () -> itemService.deleteItem(testListId, testItem.id()));
+        }
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...throws an exception if the item in a specific checklist with the given item-id does not exist")
+        void deleteItem_throwsExceptionIfTheItemWithTheGivenIdDoesNotExist() {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+            Class<NoSuchItemException> expected = NoSuchItemException.class;
+            //WHEN+THEN
+            Assertions.assertThrows(expected, () -> itemService.deleteItem(testListId, "randomNonExistingId"));
+        }
+
+        @Test
+        @DirtiesContext
+        @DisplayName("...deletes item of the given checklist in the database")
+        void deleteItem() {
+            //GIVEN
+            checklistRepository.save(testChecklist);
+            Checklist expected = testChecklistNoItems;
+            //WHEN
+            Checklist actual = itemService.deleteItem(testListId, testItem.id());
             //THEN
             Assertions.assertEquals(expected, actual);
         }
