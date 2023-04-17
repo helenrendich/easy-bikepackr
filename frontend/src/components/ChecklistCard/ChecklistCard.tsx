@@ -4,8 +4,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {Checklist} from "../../models/Checklist";
-import {Button, CardActions, Link} from "@mui/material";
+import {Button, CardActions} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import {Link} from "react-router-dom";
 
 type ChecklistCardProps = {
     checklist: Checklist
@@ -22,9 +23,9 @@ function ChecklistCard(props: ChecklistCardProps) {
 
     const card = (
         <React.Fragment>
-            <Link href={"details/" + props.checklist.id} underline={'none'}>
+            <Link to={"details/" + props.checklist.id} style={{textDecoration: 'none'}}>
                 <CardContent>
-                    <Typography fontSize={"h5"} component="div" margin={2}>
+                    <Typography fontSize={"h5"} component="div" margin={2} color={"primary"}>
                         {props.checklist.destination}
                     </Typography>
                     <Typography fontSize={"h7"} color="text.secondary" gutterBottom>
