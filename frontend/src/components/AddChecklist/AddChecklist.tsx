@@ -80,12 +80,12 @@ function AddChecklist(props: AddChecklistProps) {
                         inputProps={{'aria-label': 'controlled'}}
                     />} label="Camping"/>
 
-
-                    <Link to="/">
+                    <Link to="/" style={{textDecoration: 'none'}}>
                         <Button sx={
                             {height: '55px', margin: 1}
                         }
-                                onClick={handleSubmit} variant="contained">
+                                onClick={handleSubmit} variant="contained"
+                                disabled={inputDestination.trim().length === 0}>
                             Create Checklist
                         </Button>
                     </Link>
