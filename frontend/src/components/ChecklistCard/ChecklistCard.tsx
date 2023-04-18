@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import {Checklist} from "../../models/Checklist";
 import {Button, CardActions} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {Link} from "react-router-dom";
 
 type ChecklistCardProps = {
@@ -24,17 +25,22 @@ function ChecklistCard(props: ChecklistCardProps) {
     const card = (
         <React.Fragment>
             <Link to={"details/" + props.checklist.id} style={{textDecoration: 'none'}}>
-                <CardContent>
-                    <Typography fontSize={"h5"} component="div" margin={2} color={"primary"}>
+                <CardContent style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+                    <Typography fontSize={"h4"} component="div" color={"primary"}>
                         {props.checklist.destination}
                     </Typography>
-                    <Typography fontSize={"h7"} color="text.secondary" gutterBottom>
-                        {dateDate.toLocaleDateString("en-GB")}
-                    </Typography>
+                    <div style={{display: "flex", alignItems: "center"}}>
+                        <Typography fontSize={"h7"} color="text.secondary" style={{marginRight: "5px"}}>
+                            <CalendarMonthIcon color={"primary"}/>
+                        </Typography>
+                        <Typography fontSize={"h7"} color="text.secondary" gutterBottom>
+                            {dateDate.toLocaleDateString("en-GB")}
+                        </Typography>
+                    </div>
                 </CardContent>
             </Link>
             <CardActions sx={{justifyContent: "flex-end"}}>
-                <Button size="small" onClick={handleDelete} variant="outlined" startIcon={<DeleteIcon/>}>
+                <Button size="small" onClick={handleDelete} variant="contained" startIcon={<DeleteIcon/>}>
                     Delete
                 </Button>
             </CardActions>
@@ -46,8 +52,7 @@ function ChecklistCard(props: ChecklistCardProps) {
              justifyContent="center"
              alignItems="center"
              minHeight="10vh">
-            <Card variant="outlined"
-                  sx={{width: 400, textAlign: 'center', margin: 1}}>{card}</Card>
+            <Card sx={{width: 400, textAlign: 'center', margin: 1}}>{card}</Card>
         </Box>
     );
 }

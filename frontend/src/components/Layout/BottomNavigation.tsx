@@ -11,7 +11,8 @@ function SimpleBottomNavigation() {
     return (
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0, height: 80}} elevation={3}>
             <BottomNavigation showLabels>
-                <BottomNavigationAction component={Link} to="add" label="Add" icon={<AddTaskIcon fontSize={"large"}/>}/>
+                <BottomNavigationAction component={Link} to="/add" label="Add"
+                                        icon={<AddTaskIcon fontSize={"large"}/>}/>
                 <BottomNavigationAction component={Link} to="/" label="Overview"
                                         icon={<ChecklistIcon fontSize={"large"}/>}/>
             </BottomNavigation>
